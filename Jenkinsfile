@@ -11,7 +11,6 @@ pipeline {
             }
         }
 
-    stages {
         stage('Build-Frontend') {
             steps {
                 node {
@@ -24,7 +23,7 @@ pipeline {
                 }
             }
         }
-    }
+
 
         // stage('Build-Frontend') {
         //     steps {
