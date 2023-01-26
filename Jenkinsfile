@@ -10,82 +10,98 @@ pipeline {
                 }
             }
         }
+
+    stages {
         stage('Build-Frontend') {
             steps {
-                node('docker') {
-                    def image = 'node:16.17.1-alpine'        
-                    docker.image(image).inside {
-                        script {
-                            gv.buildFrontend()
-                        }
+                node {
+                    docker {
+                        image 'node:16.17.1-alpine'
+                    }
+                    script {
+                        gv.buildFrontend()
                     }
                 }
             }
         }
+    }
 
-        stage('Build-Backend') {
-            steps {
-                node('docker') {
-                    def image = 'node:16.17.1-alpine'
-                    docker.image(image).inside {
-                        script {
-                            gv.buildBackend()
-                        }
-                    }
-                }
-            }
-        }
+        // stage('Build-Frontend') {
+        //     steps {
+        //         node('docker') {
+        //             def image = 'node:16.17.1-alpine'        
+        //             docker.image(image).inside {
+        //                 script {
+        //                     gv.buildFrontend()
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Test-Frontend') {
-            steps {
-                node('docker') {
-                    def image = 'node:16.17.1-alpine'
-                    docker.image(image).inside {
-                        script {
-                            gv.testFrontend()
-                        }
-                    }
-                }
-            }
-        }
+        // stage('Build-Backend') {
+        //     steps {
+        //         node('docker') {
+        //             def image = 'node:16.17.1-alpine'
+        //             docker.image(image).inside {
+        //                 script {
+        //                     gv.buildBackend()
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Test-Backend') {
-            steps {
-                node('docker') {
-                    def image = 'node:16.17.1-alpine'
-                    docker.image(image).inside {
-                        script {
-                            gv.testBackend()
-                        }
-                    }
-                }
-            }
-        }
+        // stage('Test-Frontend') {
+        //     steps {
+        //         node('docker') {
+        //             def image = 'node:16.17.1-alpine'
+        //             docker.image(image).inside {
+        //                 script {
+        //                     gv.testFrontend()
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Scan-Frontend') {
-            steps {
-                node('docker') {
-                    def image = 'node:16.17.1-alpine'
-                    docker.image(image).inside {
-                        script {
-                            gv.scanFrontend()
-                        }
-                    }
-                }
-            }
-        }
+        // stage('Test-Backend') {
+        //     steps {
+        //         node('docker') {
+        //             def image = 'node:16.17.1-alpine'
+        //             docker.image(image).inside {
+        //                 script {
+        //                     gv.testBackend()
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Scan-Backend') {
-            steps {
-                node('docker') {
-                    def image = 'node:16.17.1-alpine'
-                    docker.image(image).inside {
-                        script {
-                            gv.scanBackend()
-                        }
-                    }
-                }
-            }
-        }
+        // stage('Scan-Frontend') {
+        //     steps {
+        //         node('docker') {
+        //             def image = 'node:16.17.1-alpine'
+        //             docker.image(image).inside {
+        //                 script {
+        //                     gv.scanFrontend()
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        // stage('Scan-Backend') {
+        //     steps {
+        //         node('docker') {
+        //             def image = 'node:16.17.1-alpine'
+        //             docker.image(image).inside {
+        //                 script {
+        //                     gv.scanBackend()
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
