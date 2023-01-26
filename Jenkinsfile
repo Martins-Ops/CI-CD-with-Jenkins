@@ -1,7 +1,11 @@
 #!/usr/bin/env groovy
 
 pipeline {
-    agent any
+    agent {
+        docker { 
+            image 'node:16.17.1-alpine'
+        }
+    }
     stages {
         stage('init') {
             steps {
@@ -13,16 +17,12 @@ pipeline {
 
         stage('Build-Frontend') {
             steps {
-                node {
-                    docker {
-                        image 'node:16.17.1-alpine'
-                    }
-                    script {
-                        gv.buildFrontend()
-                    }
+                script {
+                    gv.buildFrontend()
                 }
             }
-        }
+         }
+        
 
 
         // stage('Build-Frontend') {
