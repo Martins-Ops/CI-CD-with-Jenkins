@@ -1,5 +1,7 @@
 #!/usr/bin/env groovy
+
 pipeline {
+    agent any
     stages {
         stage('init') {
             steps {
@@ -9,71 +11,81 @@ pipeline {
             }
         }
         stage('Build-Frontend') {
-            agent {
-                docker { image 'node:16.17.1-alpine' }
-            }
             steps {
-                script {
-                    gv.buildFrontend()
+                node('docker') {
+                    def image = 'node:16.17.1-alpine'        
+                    docker.image(image).inside {
+                        script {
+                            gv.buildFrontend()
+                        }
+                    }
                 }
             }
         }
 
         stage('Build-Backend') {
-            agent {
-                docker { image 'node:16.17.1-alpine' }
-            }
             steps {
-                script {
-                    gv.buildBackend()
+                node('docker') {
+                    def image = 'node:16.17.1-alpine'
+                    docker.image(image).inside {
+                        script {
+                            gv.buildBackend()
+                        }
+                    }
                 }
             }
         }
 
         stage('Test-Frontend') {
-            agent {
-                docker { image 'node:16.17.1-alpine' }
-            }
             steps {
-                script {
-                    gv.testFrontend()
+                node('docker') {
+                    def image = 'node:16.17.1-alpine'
+                    docker.image(image).inside {
+                        script {
+                            gv.testFrontend()
+                        }
+                    }
                 }
             }
         }
+
         stage('Test-Backend') {
-            agent {
-                docker { image 'node:16.17.1-alpine' }
-            }
             steps {
-                script {
-                    gv.testBackend()
+                node('docker') {
+                    def image = 'node:16.17.1-alpine'
+                    docker.image(image).inside {
+                        script {
+                            gv.testBackend()
+                        }
+                    }
                 }
             }
         }
 
         stage('Scan-Frontend') {
-            agent {
-                docker { image 'node:16.17.1-alpine' }
-            }
             steps {
-                script {
-                    gv.scanFrontend()
+                node('docker') {
+                    def image = 'node:16.17.1-alpine'
+                    docker.image(image).inside {
+                        script {
+                            gv.scanFrontend()
+                        }
+                    }
                 }
             }
         }
 
         stage('Scan-Backend') {
-            agent {
-                docker { image 'node:16.17.1-alpine' }
-            }
             steps {
-                script {
-                    gv.scanBackend()
+                node('docker') {
+                    def image = 'node:16.17.1-alpine'
+                    docker.image(image).inside {
+                        script {
+                            gv.scanBackend()
+                        }
+                    }
                 }
             }
         }
     }
 }
-        
-      
-
