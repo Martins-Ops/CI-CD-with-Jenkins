@@ -1,12 +1,7 @@
 #!/usr/bin/env groovy
 
 pipeline {
-    agent {
-        docker { 
-            image 'node:16.17.1-alpine'
-            args '-u root' 
-        }
-    }
+    agent none
     stages {
         stage('init') {
             steps {
@@ -17,6 +12,13 @@ pipeline {
         }
 
         stage('Build-Frontend') {
+            agent {
+                docker { 
+                    image 'node:16.17.1-alpine'
+                    args '-v "$PWD":/frontend/node_modules -w /frontend/node_modules'
+                    reuseNode true
+                }
+            }
             steps {
                 script {
                     gv.buildFrontend()
