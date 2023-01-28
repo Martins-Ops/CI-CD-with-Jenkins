@@ -16,8 +16,8 @@ pipeline {
             agent {
                 docker { 
                     image 'node:16.17.1-alpine'
-                    args '-v "$PWD":/frontend/node_modules -w /frontend/node_modules'
-                    reuseNode true
+                    // args '-v "$PWD":/frontend/node_modules -w /frontend/node_modules'
+                    // reuseNode true
                 }
             }
             steps {
