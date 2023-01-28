@@ -1,10 +1,9 @@
 #!/usr/bin/env groovy
 
 pipeline {
-    agent none
+    agent any
     stages {
         stage('init') {
-            agent any
             steps {
                 script {
                     gv = load 'script.groovy'
